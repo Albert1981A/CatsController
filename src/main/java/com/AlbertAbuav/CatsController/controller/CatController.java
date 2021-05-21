@@ -3,6 +3,7 @@ package com.AlbertAbuav.CatsController.controller;
 import com.AlbertAbuav.CatsController.beans.Cat;
 import com.AlbertAbuav.CatsController.exception.CatsException;
 import com.AlbertAbuav.CatsController.service.CatService;
+import com.AlbertAbuav.CatsController.wrappers.ListOfCats;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class CatController {
      */
     @GetMapping("cats")  //==>  http://localhost:8080/cats_service/cats
     public ResponseEntity<?> getAllCats() {
-        return new ResponseEntity<>(catService.getAllCats(), HttpStatus.OK); //==> Return body + 200
+        return new ResponseEntity<>(new ListOfCats(catService.getAllCats()), HttpStatus.OK); //==> Return body + 200
     }
 
     /**
@@ -69,7 +70,7 @@ public class CatController {
      */
     @GetMapping("cats/name_and_weight")  //==>  http://localhost:8080/cats_service/cats/name_and_weight
     public ResponseEntity<?> getAllCatsByNameAndWeight(@RequestParam String name, @RequestParam float weight) throws CatsException {
-        return new ResponseEntity<>(catService.getAllCatsByNameAndWeight(name, weight), HttpStatus.OK); //==> Return body + 200
+        return new ResponseEntity<>(new ListOfCats(catService.getAllCatsByNameAndWeight(name, weight)), HttpStatus.OK); //==> Return body + 200
     }
 
     /**
@@ -77,7 +78,7 @@ public class CatController {
      */
     @GetMapping("cats/ascending")  //==>  http://localhost:8080/cats_service/cats/ascending
     public ResponseEntity<?> findAllCatsByWeightAscendingOrder() {
-        return new ResponseEntity<>(catService.findAllCatsByWeightAscendingOrder(), HttpStatus.OK); //==> Return body + 200
+        return new ResponseEntity<>(new ListOfCats(catService.findAllCatsByWeightAscendingOrder()), HttpStatus.OK); //==> Return body + 200
     }
 
     /**
@@ -85,7 +86,7 @@ public class CatController {
      */
     @GetMapping("cats/starting_with")  //==>  http://localhost:8080/cats_service/cats/starting_with
     public ResponseEntity<?> findAllCatsByNameStartingWith(@RequestParam String name) {
-        return new ResponseEntity<>(catService.findAllCatsByNameStartingWith(name), HttpStatus.OK); //==> Return body + 200
+        return new ResponseEntity<>(new ListOfCats(catService.findAllCatsByNameStartingWith(name)), HttpStatus.OK); //==> Return body + 200
     }
 
 }
